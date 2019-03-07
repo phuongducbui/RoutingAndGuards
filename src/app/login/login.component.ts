@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthGuard } from '../guards/auth.guard';
 import { Router } from '@angular/router';
+
+import { fakeUser } from '../../shared/fake-data/users';
 
 @Component({
   selector: 'app-login',
@@ -9,18 +10,22 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  user: string;
+  username: string;
   password: string;
+  user = fakeUser;
+
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   login() {
-    if (this.user === 'username' && this.password === '123456') {
-      localStorage.setItem('currentUser', 'username');
-      // tslint:disable-next-line:semicolon
-      this.router.navigate(['/todo'])
+    for (let index = 0; index < this.user.length; index++) {
+      if (this.username === this.user[index].username && this.user[index].password) {
+        localStorage.setItem('currentUser', 'username');
+        // tslint:disable-next-line:semicolon
+        this.router.navigate(['/todo'])
+      }
     }
   }
 }

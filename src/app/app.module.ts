@@ -11,6 +11,8 @@ import { AboutComponent } from './about/about.component';
 import { ToDoComponent } from './to-do/to-do.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guards/auth.guard';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HeaderInterceptor } from 'src/shared/interceptors/jwt.interceptor';
 
 const appRoutes: Routes = [
 
@@ -46,7 +48,11 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [
+  {
+    provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptor, multi: true
+  },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
