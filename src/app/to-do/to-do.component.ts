@@ -16,7 +16,8 @@ export class ToDoComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('username');
+    localStorage.removeItem('currentUser');
     this.router.navigate(['/login'])
+    console.log(localStorage)
   }
 }
